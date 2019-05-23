@@ -242,25 +242,47 @@ export const ngdoc: any = {
         "description": "<p>Delay of item cycling in milliseconds. If false, carousel won&#39;t cycle\nautomatically.</p>\n"
       },
       {
+        "name": "itemsPerSlide",
+        "defaultValue": "1",
+        "type": "number",
+        "description": ""
+      },
+      {
         "name": "noPause",
         "type": "boolean",
-        "description": "<p>If <code>true</code> — will disable pausing on carousel mouse hover</p>\n"
+        "description": ""
       },
       {
         "name": "noWrap",
         "type": "boolean",
-        "description": "<p>If <code>true</code> — carousel will not cycle continuously and will have hard stops (prevent looping)</p>\n"
+        "description": ""
       },
       {
         "name": "showIndicators",
         "type": "boolean",
-        "description": "<p>If <code>true</code> — carousel-indicators are visible</p>\n"
+        "description": ""
+      },
+      {
+        "name": "singleSlideOffset",
+        "defaultValue": "false",
+        "type": "boolean",
+        "description": ""
+      },
+      {
+        "name": "startFromIndex",
+        "defaultValue": "0",
+        "type": "number",
+        "description": ""
       }
     ],
     "outputs": [
       {
         "name": "activeSlideChange",
         "description": "<p>Will be emitted when active slide has been changed. Part of two-way-bindable [(activeSlide)] property</p>\n"
+      },
+      {
+        "name": "slideRangeChange",
+        "description": "<p>Will be emitted when active slides has been changed in multilist mode</p>\n"
       }
     ],
     "properties": [
@@ -356,6 +378,17 @@ export const ngdoc: any = {
         "returnType": "boolean"
       },
       {
+        "name": "isFirst",
+        "description": "<p>Defines, whether the specified index is first in collection</p>\n",
+        "args": [
+          {
+            "name": "index",
+            "type": "number"
+          }
+        ],
+        "returnType": "boolean"
+      },
+      {
         "name": "findNextSlideIndex",
         "description": "<p>Defines next slide index, depending of direction</p>\n",
         "args": [
@@ -426,6 +459,20 @@ export const ngdoc: any = {
         "description": "<p>Show carousel-indicators</p>\n"
       }
     ]
+  },
+  "SlideWithIndex": {
+    "fileName": "src/carousel/models/index.ts",
+    "className": "SlideWithIndex",
+    "description": "",
+    "methods": [],
+    "properties": []
+  },
+  "IndexedSlideList": {
+    "fileName": "src/carousel/models/index.ts",
+    "className": "IndexedSlideList",
+    "description": "",
+    "methods": [],
+    "properties": []
   },
   "SlideComponent": {
     "fileName": "src/carousel/slide.component.ts",
@@ -715,6 +762,11 @@ export const ngdoc: any = {
         "description": "<p>Initial value of datepicker</p>\n"
       },
       {
+        "name": "dateCustomClasses",
+        "type": "DatepickerDateCustomClasses[]",
+        "description": "<p>Date custom classes</p>\n"
+      },
+      {
         "name": "datesDisabled",
         "type": "Date[]",
         "description": "<p>Disable specific dates</p>\n"
@@ -789,7 +841,12 @@ export const ngdoc: any = {
         "name": "container",
         "defaultValue": "body",
         "type": "string",
-        "description": "<p>A selector specifying the element the datepicker should be appended to.\nCurrently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the datepicker should be appended to.</p>\n"
+      },
+      {
+        "name": "dateCustomClasses",
+        "type": "DatepickerDateCustomClasses[]",
+        "description": "<p>Date custom classes</p>\n"
       },
       {
         "name": "datesDisabled",
@@ -917,6 +974,11 @@ export const ngdoc: any = {
         "description": "<p>Add class to current day</p>\n"
       },
       {
+        "name": "dateCustomClasses",
+        "type": "DatepickerDateCustomClasses[]",
+        "description": "<p>Default date custom classes for all date/range pickers</p>\n"
+      },
+      {
         "name": "datesDisabled",
         "type": "Date[]",
         "description": "<p>Disable specific dates</p>\n"
@@ -991,7 +1053,12 @@ export const ngdoc: any = {
         "name": "container",
         "defaultValue": "body",
         "type": "string",
-        "description": "<p>A selector specifying the element the daterangepicker should be appended\nto. Currently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the daterangepicker should be appended to.</p>\n"
+      },
+      {
+        "name": "dateCustomClasses",
+        "type": "DatepickerDateCustomClasses[]",
+        "description": "<p>Date custom classes</p>\n"
       },
       {
         "name": "datesDisabled",
@@ -1495,6 +1562,13 @@ export const ngdoc: any = {
     "methods": [],
     "properties": []
   },
+  "DatepickerDateCustomClasses": {
+    "fileName": "src/datepicker/models/index.ts",
+    "className": "DatepickerDateCustomClasses",
+    "description": "",
+    "methods": [],
+    "properties": []
+  },
   "BsNavigationEvent": {
     "fileName": "src/datepicker/models/index.ts",
     "className": "BsNavigationEvent",
@@ -1915,7 +1989,7 @@ export const ngdoc: any = {
       {
         "name": "container",
         "type": "string",
-        "description": "<p>A selector specifying the element the popover should be appended to.\nCurrently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the popover should be appended to.</p>\n"
       },
       {
         "name": "dropup",
@@ -2490,9 +2564,15 @@ export const ngdoc: any = {
     "methods": [],
     "properties": [
       {
+        "name": "adaptivePosition",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>sets disable adaptive position</p>\n"
+      },
+      {
         "name": "container",
         "type": "string",
-        "description": "<p>A selector specifying the element the popover should be appended to.\nCurrently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the popover should be appended to.</p>\n"
       },
       {
         "name": "placement",
@@ -2516,9 +2596,14 @@ export const ngdoc: any = {
     "exportAs": "bs-popover",
     "inputs": [
       {
+        "name": "adaptivePosition",
+        "type": "boolean",
+        "description": "<p>sets disable adaptive position</p>\n"
+      },
+      {
         "name": "container",
         "type": "string",
-        "description": "<p>A selector specifying the element the popover should be appended to.\nCurrently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the popover should be appended to.</p>\n"
       },
       {
         "name": "containerClass",
@@ -3251,9 +3336,15 @@ export const ngdoc: any = {
     "methods": [],
     "properties": [
       {
+        "name": "adaptivePosition",
+        "defaultValue": "true",
+        "type": "boolean",
+        "description": "<p>sets disable adaptive position</p>\n"
+      },
+      {
         "name": "container",
         "type": "string",
-        "description": "<p>a selector specifying the element the tooltip should be appended to. Currently only supports &quot;body&quot;</p>\n"
+        "description": "<p>a selector specifying the element the tooltip should be appended to.</p>\n"
       },
       {
         "name": "delay",
@@ -3283,9 +3374,14 @@ export const ngdoc: any = {
     "exportAs": "bs-tooltip",
     "inputs": [
       {
+        "name": "adaptivePosition",
+        "type": "boolean",
+        "description": "<p>sets disable adaptive position</p>\n"
+      },
+      {
         "name": "container",
         "type": "string",
-        "description": "<p>A selector specifying the element the tooltip should be appended to.\nCurrently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the tooltip should be appended to.</p>\n"
       },
       {
         "name": "containerClass",
@@ -3483,7 +3579,7 @@ export const ngdoc: any = {
       {
         "name": "container",
         "type": "string",
-        "description": "<p>A selector specifying the element the typeahead should be appended to.\nCurrently only supports &quot;body&quot;.</p>\n"
+        "description": "<p>A selector specifying the element the typeahead should be appended to.</p>\n"
       },
       {
         "name": "dropup",

@@ -30,6 +30,8 @@ let id = 0;
 })
 export class TooltipDirective implements OnInit, OnDestroy {
   tooltipId = id++;
+  /** sets disable adaptive position */
+  @Input() adaptivePosition: boolean;
   /**
    * Content to be displayed as tooltip.
    */
@@ -53,7 +55,6 @@ export class TooltipDirective implements OnInit, OnDestroy {
   @Input() triggers: string;
   /**
    * A selector specifying the element the tooltip should be appended to.
-   * Currently only supports "body".
    */
   @Input() container: string;
   /**
@@ -227,14 +228,6 @@ export class TooltipDirective implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._positionService.setOptions({
-      modifiers: {
-        flip: {
-          enabled: true
-        }
-      }
-    });
-
     this._tooltip.listen({
       triggers: this.triggers,
       show: () => this.show()
@@ -264,6 +257,17 @@ export class TooltipDirective implements OnInit, OnDestroy {
    * the tooltip.
    */
   show(): void {
+    this._positionService.setOptions({
+      modifiers: {
+        flip: {
+          enabled: this.adaptivePosition
+        },
+        preventOverflow: {
+          enabled: this.adaptivePosition
+        }
+      }
+    });
+
     if (
       this.isOpen ||
       this.isDisabled ||
